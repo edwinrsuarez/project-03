@@ -1,0 +1,60 @@
+Predix Machine is a lightweight kernel that can be deployed on various OSGi
+containers.
+
+
+Predix Machine Container Startup Scripts
+=====================================================================
+
+-- start_container.sh (Linux, Macintosh) / start_container.bat (Windows) --
+ This file is the main startup script. To perform a 
+ clean start add the argument "clean" to the executable command.
+ For example:
+
+	"start_container.bat clean" or "start_container.sh clean"
+
+
+=====================================================================
+Folder Structure
+=====================================================================
+
+/--
+    /appdata - Application created data. This can include git repositories or databases.
+    
+    /bin - Top level start and stop scripts for Predix Machine choosing one of three methods to start Predix Machine:
+        Yeti, mBSA, or starting the container without a watchdog.
+        /service_installation - Scripts and executables to set up Predix Machine as a service
+    
+    /configuration - bundle configuration, property files and system properties 
+        /machine - machine container configuration
+        /install - (optional) installation scripts used by yeti to install configuration on the device.
+     
+    /installations - (optional) location for yeti to monitor for install zips.
+    
+    /licence - legal documents
+    
+    /logs - log files if file logging is setup. These will be grouped by application.
+        /installations - (optional) Yeti installation logs
+        /machine - Logs for Machine applications
+        /mbsa - (optional) mbsa logs
+    
+    /machine- The ProSyst container
+        /bin
+            /predix - contains startup scripts. start by running "start_container.sh"
+            /vms
+                boot.ini - list of ProSyst bundles and their start order.
+                /jdk
+                    server or server.bat - ProSyst start script.
+                    /storage - framework runtime storage.  During a clean start, the contents of this folder will be deleted.
+        /bundles - the ProSyst bundles
+        /config - used for storing configuration for OSGi meta-types.
+        /install - (optional) installation scripts used by yeti to install machine on the device.
+        /lib  - native libraries and frameworks
+    
+    /mbsa - (optional) if the mbsa option is selected
+        /bin - start/stop scripts
+        /install - installation scripts used by yeti to install on the device.
+        /lib - native libraries and frameworks
+
+    /security - setup bundle level security and key and trust stores
+    
+    /yeti - (optional) process to monitor the installations folder and install packages from the Device Management in the cloud.
